@@ -1,0 +1,173 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e1e;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: #ff9800;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    animation: fadeIn 2s;
+    z-index: 999;
+}
+
+.arrow-icon {
+    fill: white;
+    width: 20px;
+    height: 20px;
+}
+
+.header {
+    background-color: #222;
+    text-align: center;
+    padding: 20px;
+    animation: fadeIn 2s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin: 0;
+    color: white;
+}
+
+.leet {
+    color: #ff9800;
+}
+
+.coder {
+    color: white;
+}
+
+.container {
+    background-color: #222;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 500px;
+    margin-top: 70px;
+    position: relative;
+    z-index: 1;
+}
+
+.avatar-section {
+    background-color: #222;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #444;
+    animation: fadeIn 2s;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+    animation: pulse 2s infinite;
+}
+
+.user-details {
+    flex: 1;
+}
+
+.user-details h2 {
+    font-size: 28px;
+    margin: 0;
+    color: white;
+}
+
+.user-details p {
+    font-size: 18px;
+    margin: 5px 0;
+    color: #ccc;
+}
+
+.question-stats {
+    padding: 20px;
+    border-bottom: 1px solid #444;
+    animation: fadeIn 2s;
+}
+
+.question-stats h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.question-stats ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.question-stats li {
+    font-size: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.count {
+    font-weight: bold;
+    font-size: 28px;
+    margin-right: 10px;
+}
+
+.submissions-count {
+    font-size: 18px;
+    color: #888;
+    animation: fadeIn 2s;
+}
+
+.action-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    animation: fadeIn 2s;
+}
+
+.action-button:hover {
+    background-color: #f57c00;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

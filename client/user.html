@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="user.css">
+    <title>LeetCode Stats</title>
+</head>
+<body>
+    <div class="back-btn" id="back-btn">
+        <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+    </div>
+    <div class="header" id="header">
+        <!-- <h1><span class="leet">Leet</span><span class="coder">Coder</span> Username</h1> -->
+    </div>
+    <div class="container">
+        <div class="avatar-section" id="avatar-section">
+            
+            <div class="user-details">
+                <h2 id="leetcode_username">Username</h2>
+                <p id="username">leetcode_username</p>
+            </div>
+        </div>
+        <div class="question-stats">
+            <h2>Question Statistics</h2>
+            <ul>
+                <li><span class="count" id="total">0</span> Total Questions</li>
+                <li><span class="count" id="easy">0</span> Easy Questions</li>
+                <li><span class="count" id="medium" >0</span> Medium Questions</li>
+                <li><span class="count" id="hard">0</span> Hard Questions</li>
+            </ul>
+            <p class="submissions-count" >Last Year Submissions: <span class="count" id="submissions-count">0</span></p>
+        </div>
+        <button class="action-button">View More</button>
+    </div>
+    <script src="script.js"></script>
+    <script src="user.js"></script>
+</body>
+</html>
