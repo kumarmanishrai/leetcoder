@@ -8,7 +8,13 @@ const port = 4000;
 const app = express();
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: ["https://leetcoder-2c2q.vercel.app"],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+
+}))
 
 var total
 var username
