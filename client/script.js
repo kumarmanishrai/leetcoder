@@ -8,7 +8,7 @@ async function searchUser() {
   if (inputId.value.trim() !== "") {
     details.innerHTML = `<h1>Loading. . . </h1>`;
     let user = inputId.value;
-    await fetch("http://localhost:4000/getUser", {
+    await fetch("https://leetcoder-2c2q.vercel.app//getUser", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
