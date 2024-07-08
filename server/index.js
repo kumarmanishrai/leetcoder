@@ -39,7 +39,7 @@ async function getUserDetails(req, res) {
     var cntr3 = "submissionsCount"
     let userid = req.body.userid
     try {
-        await axios.get(`https://leetcode.com/${userid}/`)
+        await axios.get(`https://leetcode.com/u/${userid}/`)
         .then(res => {
             const $ = cheerio.load(res.data)
             $('.space-y-2').each((index, element) => {
