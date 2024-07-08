@@ -16,6 +16,7 @@ async function searchUser() {
       body: JSON.stringify({
         userid: inputId.value,
       }),
+      credentials: "include",
     })
       .then((res) => {
         console.log(res);
