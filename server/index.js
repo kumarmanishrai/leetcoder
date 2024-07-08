@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json())
 app.use(cors({
-    origin: ["https://leetcoder-2c2q.vercel.app"],
+    origin: ["https://leetcoder-umber.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
