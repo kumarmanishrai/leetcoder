@@ -60,5 +60,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 document.getElementById("back-btn").addEventListener('click',()=>{
     console.log('clicked');
-    window.location.href = `http://localhost:5500/client/`
+    window.location.href = `https://leetcoder-umber.vercel.app/`
 })
