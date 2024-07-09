@@ -4,11 +4,13 @@
 let inputId = document.getElementById("leetcodeId");
 let details = document.getElementById("profileDetails");
 
+const url = "https://leetcoder-qy4c.onrender.com"
+
 async function searchUser() {
   if (inputId.value.trim() !== "") {
     details.innerHTML = `<h1>Loading. . . </h1>`;
     let user = inputId.value;
-    await fetch("https://leetcoder-2c2q.vercel.app/getUser", {
+    await fetch(`${url}/getUser`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
