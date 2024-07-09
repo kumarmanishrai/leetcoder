@@ -28,7 +28,7 @@ async function searchUser() {
         }
       })
       .then((data) => {
-        window.location.href = `http://localhost:5500/client/user.html?userid=${data.userid}&total=${data.total}&username=${data.username}&easy=${data.other[0].ques}&medium=${data.other[1].ques}&hard=${data.other[2].ques}&days=${data.other[3].ques}&imgurl=${data.imgurl}
+        window.location.href = `https://leetcoder-umber.vercel.app/user.html?userid=${data.userid}&total=${data.total}&username=${data.username}&easy=${data.other[0].ques}&medium=${data.other[1].ques}&hard=${data.other[2].ques}&days=${data.other[3].ques}&imgurl=${data.imgurl}
 
         `;
       })
