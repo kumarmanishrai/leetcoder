@@ -1,31 +1,21 @@
 const express = require('express');
 const cors = require('cors')
 const axios = require('axios');
-const cheerio = require('cheerio');
+const puppeteer = require('puppeteer')
 
-const port = process.env.PORT;
+
+const port = process.env.PORT || 5000;
 
 const app = express();
 
 app.use(express.json())
 app.use(cors({
-    origin: ["https://leetcoder-umber.vercel.app"],
+    origin: ["https://leetcoder-umber.vercel.app", "*"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
 
 }))
-
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://leetcoder-umber.vercel.app");
-    res.header("Access-Control-Allow-Credentials", true);
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-  });
-
 var total
 var username
 var imgurl
@@ -41,76 +31,48 @@ var cntr4 = "submissions in the last year"
 // console.log(`userid: ${userid}`);
 
 async function getUserDetails(req, res) {
-    var total
-    var arr = []
-    var c = 1;
-    var cntr1 = "easy"
-    var cntr2 = "medium"
-    var cntr3 = "submissionsCount"
+    console.log(req.body)
+
     let userid = req.body.userid
     try {
-        await axios.get(`https://leetcode.com/u/${userid}/`)
-        .then(res => {
-            const $ = cheerio.load(res.data)
-            $('.space-y-2').each((index, element) => {
-                ans = $(element).find('.text-base').text()
-                if (ans.trim() !== '') {
-                    let level = eval(`cntr${c++}`)
-                    let ques = ans.trim()
-                    arr.push({
-                        level: level,
-                        ques: ques,
-                    });
-                    if (arr.length == 4) {
-                        arr.forEach(e => {
-                            console.log(`${e.level} : ${e.ques}`);
-                        })
-                    }
+        console.log("here")
+        const browser = await puppeteer.launch();
+        console.log("here1")
 
-                }
+        const page = await browser.newPage();
 
-            })
-            $('.space-x-4').each((index, element) => {
-                ans = $(element).find('img').attr('src');
-                if(typeof ans === 'string') {
-                    imgurl = ans.trim()
-                }
-                
-            })
-            $('.absolute').each((index, element) => {
-                ans = $(element).find('.font-medium').text()
-                if (ans.trim() !== '') {
-                    total = ans.trim()
-                    console.log("Total: " + total);
-                }
-            })
-            
-            $('.items-center').each((index, element) => {
-                ans = $(element).find('.font-semibold').text()
-                if(ans.trim() !== '') {
-                    username = ans.trim()
-                    console.log(username);
-                }
-                
-            })
-        })
+        await page.goto(`https://leetcode.com/${userid}`);
+        console.log("here1")
+        console.log(page)
 
-        const handleTimeout = setTimeout(function(){
-            res.status(404).send({
-                msg: "user not found"
-            })
-        },12000)
+        await page.setViewport({width: 1080, height: 1024});
+        console.log("here2")
+
+        const textSelector = await page.locator('.text-label-1').waitHandle();
+        console.log(textSelector)
+        const fullTitle = await textSelector?.evaluate(el => el.textContent);
+
+        // Print the full title.
+        console.log('The title of this blog post is "%s".', fullTitle);
+
+        // const handleTimeout = setTimeout(function(){
+        //     res.status(404).send({
+        //         msg: "user not found"
+        //     })
+        // },12000)
 
         setTimeout(function(){
-            clearTimeout(handleTimeout)
+            // clearTimeout(handleTimeout)
             res.status(200).send({
-                userid: userid,
-                username: username,
-                imgurl: imgurl,
-                total: total,
-                other: arr,
+                // userid: userid,
+                // username: username,
+                // imgurl: imgurl,
+                // total: total,
+                // other: arr,
+                data: textSelector
             })
-        },4000)
+        },8000)
+        
         
     } catch (error) {
         res.status(404).send({
@@ -122,6 +84,9 @@ async function getUserDetails(req, res) {
     
 }
 
+app.get('/check', (req, res)=> {
+    res.send("listening on backend")
+})
 app.post('/getUser', getUserDetails)
 
 

@@ -4,7 +4,10 @@
 let inputId = document.getElementById("leetcodeId");
 let details = document.getElementById("profileDetails");
 
-const url = "https://leetcoder-qy4c.onrender.com"
+// const url = "https://leetcoder-qy4c.onrender.com"
+const url = "http://localhost:5000"
+const client = "http://localhost:5500/client"
+// const client = "https://leetcoder-umber.vercel.app"
 
 async function searchUser() {
   if (inputId.value.trim() !== "") {
@@ -30,7 +33,7 @@ async function searchUser() {
         }
       })
       .then((data) => {
-        window.location.href = `https://leetcoder-umber.vercel.app/user.html?userid=${data.userid}&total=${data.total}&username=${data.username}&easy=${data.other[0].ques}&medium=${data.other[1].ques}&hard=${data.other[2].ques}&days=${data.other[3].ques}&imgurl=${data.imgurl}
+        window.location.href = `${client}/user.html?userid=${data.userid}&total=${data.total}&username=${data.username}&easy=${data.other[0].ques}&medium=${data.other[1].ques}&hard=${data.other[2].ques}&days=${data.other[3].ques}&imgurl=${data.imgurl}
 
         `;
       })
