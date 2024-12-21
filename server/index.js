@@ -36,40 +36,61 @@ async function getUserDetails(req, res) {
     let userid = req.body.userid
     try {
         console.log("here")
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({headless: false});
         console.log("here1")
 
         const page = await browser.newPage();
 
-        await page.goto(`https://leetcode.com/${userid}`);
-        console.log("here1")
+        await page.goto(`https://leetcode.com/${userid}`,{ waitUntil: 'networkidle2' });
+        console.log("here2")
         console.log(page)
 
         await page.setViewport({width: 1080, height: 1024});
-        console.log("here2")
+        
+        const data = await page.evaluate(() => {
+            const name = document.querySelector(
+              '.text-label-1.dark\\:text-dark-label-1.break-all.text-base.font-semibold'
+            )?.innerText;
+        
+            const rank = document.querySelector(
+              '.flex-1.items-end.space-x-\\[5px\\].text-base span:nth-child(2)'
+            )?.innerText;
+        
+            const location = document.querySelector(
+              '.flex.items-start.space-x-\\[9px\\]:nth-child(2) .truncate'
+            )?.innerText;
+        
+            const institution = document.querySelector(
+              '.flex.items-start.space-x-\\[9px\\]:nth-child(3) .truncate'
+            )?.innerText;
+        
+            const githubLink = document.querySelector(
+              'a[href^="https://github.com"]'
+            )?.href;
+        
+            const linkedinLink = document.querySelector(
+              'a[href^="https://linkedin.com"]'
+            )?.href;
+        
+            const skills = Array.from(
+              document.querySelectorAll(
+                '.text-label-2.dark\\:text-dark-label-2.bg-fill-3.dark\\:bg-dark-fill-3.rounded-\\[16px\\].px-2.py-0\\.5.text-xs'
+              )
+            ).map(skill => skill.innerText);
 
-        const textSelector = await page.locator('.text-label-1').waitHandle();
-        console.log(textSelector)
-        const fullTitle = await textSelector?.evaluate(el => el.textContent);
+            const solvedProblems = document.querySelector('div span.text-[30px]').innerText; // 736
+            const categories = Array.from(document.querySelectorAll('.flex-none.flex-col .text-xs.font-medium')).map((el) => ({
+            category: el.innerText,
+            stats: el.nextElementSibling.innerText
+            }));
+        
+            return { name, rank, location, institution, githubLink, linkedinLink, skills, solvedProblems, categories };
+          });
 
-        // Print the full title.
-        console.log('The title of this blog post is "%s".', fullTitle);
-
-        // const handleTimeout = setTimeout(function(){
-        //     res.status(404).send({
-        //         msg: "user not found"
-        //     })
-        // },12000)
 
         setTimeout(function(){
-            // clearTimeout(handleTimeout)
             res.status(200).send({
-                // userid: userid,
-                // username: username,
-                // imgurl: imgurl,
-                // total: total,
-                // other: arr,
-                data: textSelector
+                data: data
             })
         },8000)
         

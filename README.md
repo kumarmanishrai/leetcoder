@@ -1,6 +1,6 @@
 #LeetCoder
 
-## This is leetcode profile searching website which fetch all data for matching username also with profile picture.
+## This is leetcode profile searching website which fetches all the user's data by webscrapping the leetcode profile page of user.
 
 Here are some sample screenshots of the website: 
 
